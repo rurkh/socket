@@ -13,7 +13,8 @@ type ConnectorProps = {
 }
 
 const Connector = ({ eventId, eventName, visible }: ConnectorProps) => {
-    const event = useConnectorValue(eventId);
+    // @ts-ignore
+    const event: any = useConnectorValue(eventId);
     const[connState, setConnState ] = useState(event?.connected || false);
     const [shouldDisplay, setShouldDisplay] = useState(visible === 'all' || connState)
     const socket = useSocket();
