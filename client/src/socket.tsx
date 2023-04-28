@@ -31,7 +31,7 @@ export const [useConnectorValues] = bind(newConnectorValue$, {} as Record<Messag
 
 export const [useConnectorValue] = bind((id: string): any => newConnectorValue$.pipe(filter((item:Record<string, Message>): boolean => item[id] ? item[id].connected : !!item.connected), map((item: Record<string, Message>) => item[id])), { connected: true});
 
-export const Websocket: any = () => {
+export const Websocket = () => {
     const socket: WebSocket = useSocket();
     const connectors = useConnectors();
     const connectorValues: Record<string, Message> = useConnectorValues();
@@ -60,7 +60,6 @@ export const Websocket: any = () => {
     }, [message]);
 
     useEffect(() => {
-        console.log('ll', socket.url, socket);
         if (!socket.url) return;
         socket.onopen = () => onReady(true);
         socket.onclose = () => onReady(false);
